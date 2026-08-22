@@ -18,7 +18,6 @@ function HomePage() {
   })
 
   const [editingTask, setEditingTask] = useState(null)
-
   const [statusFilter, setStatusFilter] = useState("all")
   const [priorityFilter, setPriorityFilter] = useState("all")
   const [searchTerm, setSearchTerm] = useState("")
@@ -102,35 +101,47 @@ function HomePage() {
   const sortedTasks = [...filteredTasks]
 
   if (sortOption === "newest") {
-    sortedTasks.sort(
-      (firstTask, secondTask) =>
-        new Date(secondTask.createdAt) -
-        new Date(firstTask.createdAt)
-    )
+    sortedTasks.sort((firstTask, secondTask) => {
+      const firstDate = firstTask.createdAt
+        ? new Date(firstTask.createdAt).getTime()
+        : 0
+
+      const secondDate = secondTask.createdAt
+        ? new Date(secondTask.createdAt).getTime()
+        : 0
+
+      return secondDate - firstDate
+    })
   }
 
   if (sortOption === "oldest") {
-    sortedTasks.sort(
-      (firstTask, secondTask) =>
-        new Date(firstTask.createdAt) -
-        new Date(secondTask.createdAt)
-    )
+    sortedTasks.sort((firstTask, secondTask) => {
+      const firstDate = firstTask.createdAt
+        ? new Date(firstTask.createdAt).getTime()
+        : 0
+
+      const secondDate = secondTask.createdAt
+        ? new Date(secondTask.createdAt).getTime()
+        : 0
+
+      return firstDate - secondDate
+    })
   }
 
   if (sortOption === "title-asc") {
     sortedTasks.sort((firstTask, secondTask) =>
-      firstTask.title.localeCompare(
-        secondTask.title,
-        "tr"
+      (firstTask.title || "").localeCompare(
+        secondTask.title || "",
+        "tr-TR"
       )
     )
   }
 
   if (sortOption === "title-desc") {
     sortedTasks.sort((firstTask, secondTask) =>
-      secondTask.title.localeCompare(
-        firstTask.title,
-        "tr"
+      (secondTask.title || "").localeCompare(
+        firstTask.title || "",
+        "tr-TR"
       )
     )
   }
@@ -144,8 +155,8 @@ function HomePage() {
 
     sortedTasks.sort(
       (firstTask, secondTask) =>
-        priorityOrder[firstTask.priority] -
-        priorityOrder[secondTask.priority]
+        (priorityOrder[firstTask.priority] || 4) -
+        (priorityOrder[secondTask.priority] || 4)
     )
   }
 
@@ -158,6 +169,7 @@ function HomePage() {
           <div className="col-lg-4">
             <div className="sticky-form">
               <TaskForm
+                key={editingTask?.id ?? "new"}
                 onAddTask={addTask}
                 onUpdateTask={updateTask}
                 editingTask={editingTask}

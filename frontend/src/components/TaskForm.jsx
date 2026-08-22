@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 const initialFormData = {
   title: "",
@@ -8,34 +8,31 @@ const initialFormData = {
   status: "todo",
 }
 
+function getInitialFormData(editingTask) {
+  if (!editingTask) {
+    return initialFormData
+  }
+
+  return {
+    title: editingTask.title || "",
+    description: editingTask.description || "",
+    assignee: editingTask.assignee || "",
+    priority: editingTask.priority || "medium",
+    status: editingTask.status || "todo",
+  }
+}
+
 function TaskForm({
   onAddTask,
   onUpdateTask,
   editingTask,
   onCancelEditing,
 }) {
-  const [formData, setFormData] =
-    useState(initialFormData)
+  const [formData, setFormData] = useState(() =>
+    getInitialFormData(editingTask)
+  )
 
   const [errors, setErrors] = useState({})
-
-  useEffect(() => {
-    if (editingTask) {
-      setFormData({
-        title: editingTask.title || "",
-        description:
-          editingTask.description || "",
-        assignee: editingTask.assignee || "",
-        priority:
-          editingTask.priority || "medium",
-        status: editingTask.status || "todo",
-      })
-    } else {
-      setFormData(initialFormData)
-    }
-
-    setErrors({})
-  }, [editingTask])
 
   function handleChange(event) {
     const { name, value } = event.target
@@ -57,24 +54,18 @@ function TaskForm({
     const validationErrors = {}
 
     const trimmedTitle = formData.title.trim()
-    const trimmedDescription =
-      formData.description.trim()
-    const trimmedAssignee =
-      formData.assignee.trim()
+    const trimmedDescription = formData.description.trim()
+    const trimmedAssignee = formData.assignee.trim()
 
     if (!trimmedTitle) {
-      validationErrors.title =
-        "Görev başlığı zorunludur."
+      validationErrors.title = "Görev başlığı zorunludur."
     }
 
     if (!trimmedAssignee) {
-      validationErrors.assignee =
-        "Sorumlu kişi zorunludur."
+      validationErrors.assignee = "Sorumlu kişi zorunludur."
     }
 
-    if (
-      Object.keys(validationErrors).length > 0
-    ) {
+    if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors)
       return
     }
@@ -122,14 +113,11 @@ function TaskForm({
           </span>
 
           <h1 className="h3 mb-1">
-            {editingTask
-              ? "Görevi Düzenle"
-              : "Yeni Görev"}
+            {editingTask ? "Görevi Düzenle" : "Yeni Görev"}
           </h1>
 
           <p className="text-body-secondary mb-0">
-            Görev bilgilerini doldurarak çalışma
-            planınıza ekleyin.
+            Görev bilgilerini doldurarak çalışma planınıza ekleyin.
           </p>
         </div>
 
@@ -174,7 +162,7 @@ function TaskForm({
               className="form-control"
               value={formData.description}
               onChange={handleChange}
-              placeholder="Software Team için görev detaylarını yazın"
+              placeholder="Görev hakkında kısa bir açıklama yazın"
               rows="4"
             />
           </div>
@@ -191,13 +179,11 @@ function TaskForm({
               type="text"
               id="assignee"
               name="assignee"
-              className={`form-control ${errors.assignee
-                  ? "is-invalid"
-                  : ""
+              className={`form-control ${errors.assignee ? "is-invalid" : ""
                 }`}
               value={formData.assignee}
               onChange={handleChange}
-              placeholder="Frontend Team"
+              placeholder="Örneğin: Frontend Ekibi"
             />
 
             {errors.assignee && (
@@ -223,17 +209,9 @@ function TaskForm({
                 value={formData.priority}
                 onChange={handleChange}
               >
-                <option value="low">
-                  Düşük
-                </option>
-
-                <option value="medium">
-                  Orta
-                </option>
-
-                <option value="high">
-                  Yüksek
-                </option>
+                <option value="low">Düşük</option>
+                <option value="medium">Orta</option>
+                <option value="high">Yüksek</option>
               </select>
             </div>
 
@@ -252,14 +230,10 @@ function TaskForm({
                 value={formData.status}
                 onChange={handleChange}
               >
-                <option value="todo">
-                  Yapılacak
-                </option>
-
+                <option value="todo">Yapılacak</option>
                 <option value="in-progress">
                   Devam Ediyor
                 </option>
-
                 <option value="completed">
                   Tamamlandı
                 </option>

@@ -30,13 +30,14 @@ Veriler LocalStorage üzerinde saklandığı için sayfa yenilendiğinde görevl
 - React
 - Vite
 - JavaScript
-- HTML5
+- HTML
 - CSS3
 - Bootstrap 5
 - Bootstrap Icons
 - LocalStorage
 - Git
 - GitHub
+- Netlify
 
 ---
 
@@ -53,34 +54,39 @@ Projede temel CRUD işlemleri uygulanmıştır:
 
 ## Proje Yapısı
 
+## Proje Yapısı
+
 ```text
-TaskFlow/
-│
-├── docs/
+taskflow/
 │
 ├── frontend/
 │   ├── public/
-│   │
 │   ├── src/
+│   │   ├── assets/
 │   │   ├── components/
-│   │   │   ├── Navbar.jsx
-│   │   │   ├── TaskCard.jsx
-│   │   │   ├── TaskFilter.jsx
-│   │   │   ├── TaskForm.jsx
-│   │   │   ├── TaskList.jsx
-│   │   │   └── TaskStats.jsx
+│   │   │   ├── Navbar
+│   │   │   ├── TaskCard
+│   │   │   ├── TaskFilter
+│   │   │   ├── TaskForm
+│   │   │   ├── TaskList
+│   │   │   └── TaskStats
 │   │   │
 │   │   ├── pages/
-│   │   │   └── HomePage.jsx
+│   │   │   └── HomePage
 │   │   │
 │   │   ├── App.jsx
-│   │   ├── index.css
-│   │   └── main.jsx
+│   │   ├── main.jsx
+│   │   └── index.css
 │   │
-│   └── package.json
+│   ├── index.html
+│   ├── package.json
+│   ├── package-lock.json
+│   └── vite.config.js
 │
 ├── screenshots/
-│   └── taskflow-dashboard.png
+│   ├── taskflow-dashboard1.png
+│   ├── taskflow-dashboard2.png
+│   └── taskflow-dashboard3.png
 │
 ├── .gitignore
 └── README.md
@@ -118,8 +124,6 @@ Terminalde gösterilen yerel adresi tarayıcıda açarak uygulamayı kullanabili
 
 ---
 
-## Ekran Görüntüsü
-
 ## Ekran Görüntüleri
 
 ![TaskFlow Dashboard](./screenshots/taskflow-dashboard1.png)
@@ -135,6 +139,12 @@ Terminalde gösterilen yerel adresi tarayıcıda açarak uygulamayı kullanabili
 https://curious-daffodil-7060e4.netlify.app/
 
 ---
+
+## GitHub
+
+Projenin kaynak kodlarına GitHub üzerinden ulaşabilirsiniz:
+
+https://github.com/hayatguler/Taskflow
 
 ## Projenin Amacı
 
