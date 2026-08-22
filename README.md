@@ -33,7 +33,6 @@ Veriler LocalStorage üzerinde saklandığı için sayfa yenilendiğinde görevl
 - HTML
 - CSS3
 - Bootstrap 5
-- Bootstrap Icons
 - LocalStorage
 - Git
 - GitHub
@@ -51,8 +50,6 @@ Projede temel CRUD işlemleri uygulanmıştır:
 - **Delete:** Görevleri silme
 
 ---
-
-## Proje Yapısı
 
 ## Proje Yapısı
 
@@ -99,7 +96,7 @@ taskflow/
 Projeyi bilgisayarınızda çalıştırmak için repository'yi klonlayın:
 
 ```bash
-git clone https://github.com/hayatguler/TaskFlow.git
+git clone https://github.com/hayatguler/Taskflow.git
 ```
 
 Projenin frontend klasörüne geçin:
